@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Website</title>
+    <style>
+      /* ── Reset ── */
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      /* ── Variables ── */
+      :root {
+        --bg:      #ffffff;
+        --text:    #111111;
+        --accent:  #0066cc;
+        --muted:   #666666;
+        --max-w:   800px;
+      }
+
+      /* ── Base ── */
+      body {
+        font-family: Georgia, "Times New Roman", serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.7;
+        padding: 2rem 1.5rem;
+      }
+
+      /* ── Layout ── */
+      header, main, footer {
+        max-width: var(--max-w);
+        margin: 0 auto;
+      }
+
+      /* ── Header ── */
+      header {
+        border-bottom: 2px solid var(--text);
+        padding-bottom: 1rem;
+        margin-bottom: 2.5rem;
+      }
+
+      header h1 {
+        font-size: 2rem;
+        letter-spacing: -0.02em;
+      }
+
+      nav {
+        margin-top: 0.5rem;
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      nav a {
+        color: var(--accent);
+        text-decoration: none;
+        font-family: monospace;
+        font-size: 0.9rem;
+      }
+
+      nav a:hover { text-decoration: underline; }
+
+      /* ── Main content ── */
+      main section { margin-bottom: 2.5rem; }
+
+      main h2 {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      main p { max-width: 65ch; }
+
+      /* ── Footer ── */
+      footer {
+        margin-top: 3rem;
+        padding-top: 1rem;
+        border-top: 1px solid #ddd;
+        font-size: 0.8rem;
+        color: var(--muted);
+        font-family: monospace;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ── HEADER ── -->
+    <header>
+      <h1>Ged's library </h1>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- ── MAIN ── -->
+    <main>
+      <section id="about">
+        <h2>About</h2>
+        <p>Hello, My name is Jake. I am a microbiologist at Purdue Northwest. I am currently researching serratia marcescens and its adaptaion to urinary tract like conditons </p>
+      </section>
+
+      <section id="work">
+        <h2>Work</h2>
+        <p>Project zero/ E-Reader. This project will utlize project gutenburg and a raspberry pi pico to make a kindle like device.</p>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <p>
+          Reach me at
+          <a href="mailto:jsues@pnw.edu">jsues@pnw.edu</a>
+          or on
+          <a href="https://github.com/yourusername" target="_blank">GitHub</a>.
+        </p>
+      </section>
+    </main>
+
+    <!-- ── FOOTER ── -->
+    <footer>
+      <p>&copy; 2026 Your Name. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
