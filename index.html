@@ -3,17 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ged's Library</title>
+    <title>Jakes's Library</title>
     <style>
       /* ── Reset ── */
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
       /* ── Variables ── */
       :root {
-        --bg:      #252525;
-        --text:    #111111;
-        --accent:  #0066cc;
-        --muted:   #666666;
+        --bg:      #cfd0cf;
+        --text:    #000000;
+        --accent:  #000000;
+        --muted:   #000000;
         --max-w:   800px;
       }
 
@@ -38,29 +38,46 @@
         padding-bottom: 1rem;
         margin-bottom: 2.5rem;
       }
-
       header h1 {
         font-size: 2rem;
         letter-spacing: -0.02em;
       }
 
+      /* ── Nav ── */
       nav {
         margin-top: 0.5rem;
         display: flex;
         gap: 1.5rem;
       }
-
       nav a {
         color: var(--accent);
         text-decoration: none;
         font-family: monospace;
         font-size: 0.9rem;
+        cursor: pointer;
+        padding-bottom: 2px;
+        border-bottom: 2px solid transparent;
+        transition: border-color 0.15s;
+      }
+      nav a:hover { text-decoration: underline; }
+      nav a.active {
+        border-bottom: 2px solid var(--accent);
+        font-weight: bold;
       }
 
-      nav a:hover { text-decoration: underline; }
-
-      /* ── Main content ── */
-      main section { margin-bottom: 2.5rem; }
+      /* ── Sections ── */
+      main section {
+        display: none;          /* hide all sections by default */
+        margin-bottom: 2.5rem;
+        animation: fadeIn 0.2s ease;
+      }
+      main section.visible {
+        display: block;         /* show only the active one */
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(6px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
 
       main h2 {
         font-size: 1.3rem;
@@ -68,7 +85,6 @@
         color: var(--muted);
         font-style: italic;
       }
-
       main p { max-width: 65ch; }
 
       /* ── Footer ── */
@@ -82,28 +98,37 @@
       }
     </style>
   </head>
-
   <body>
+
     <!-- ── HEADER ── -->
     <header>
-      <h1>Ged's library </h1>
+      <h1>Jakes's Library</h1>
       <nav>
-        <a href="#about">About</a>
-        <a href="#work">Work</a>
-        <a href="#contact">Contact</a>
+        <a href="#about"   class="nav-link active" data-target="about">About</a>
+        <a href="#work"    class="nav-link"         data-target="work">Work</a>
+        <a href="#contact" class="nav-link"         data-target="contact">Contact</a>
       </nav>
     </header>
 
     <!-- ── MAIN ── -->
     <main>
-      <section id="about">
+      <section id="about" class="visible">
         <h2>About</h2>
-        <p>Hello, My name is Jake. I am a microbiologist at Purdue Northwest. I am currently researching serratia marcescens and its adaptaion to urinary tract like conditons </p>
+        <p>Hello, my name is Jake. I am a masters-level microbiologist currently researching <em>Serratia marcescens</em> and its adaptation to urinary-tract-like conditions.
+        My current intrests revolve around studying bacteria with a bioinformatical anylsis. I hope that
+      you can find something intresting here.
+    Check out my Work page to see current research and projects that I am 
+    currently working on. If you have any questions feel free to reach out </p>
       </section>
+      <main>
+        <section id="about" class="visible">
+          <h2>Education</h2>
+          <p>B.S. with a Minor in Chemistry, Purdue University Northwest | M.S. Candidate, Purdue University (Expected 2027)
+        </section>
 
       <section id="work">
         <h2>Work</h2>
-        <p>Project zero/ E-Reader. This project will utlize project gutenburg and a raspberry pi pico to make a kindle like device.</p>
+        <p>Project Zero / E-Reader. This project will utilise Project Gutenberg and a Raspberry Pi Pico to make a Kindle-like device.</p>
       </section>
 
       <section id="contact">
@@ -112,14 +137,46 @@
           Reach me at
           <a href="mailto:jsues@pnw.edu">jsues@pnw.edu</a>
           or on
-          <a href="https://github.com/yourusername" target="_blank">GitHub</a>.
+          <a href="https://github.com/Deadeye9696" target="_blank">GitHub</a>.
         </p>
       </section>
     </main>
 
     <!-- ── FOOTER ── -->
     <footer>
-      <p>&copy; 2026 Your Name. All rights reserved.</p>
+      <p>&copy; 2026 Ged's Library. All rights reserved.</p>
     </footer>
+
+    <script>
+      const links    = document.querySelectorAll('.nav-link');
+      const sections = document.querySelectorAll('main section');
+
+      links.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();                       // stop the page-jump / black flash
+
+          const target = link.dataset.target;
+
+          // Update active nav link
+          links.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+
+          // Show only the matching section
+          sections.forEach(sec => {
+            sec.classList.toggle('visible', sec.id === target);
+          });
+
+          // Keep the URL tidy without causing a jump
+          history.replaceState(null, '', '#' + target);
+        });
+      });
+
+      // On page load, show the section that matches the URL hash (if any)
+      const hash = location.hash.replace('#', '');
+      if (hash) {
+        const matchingLink = document.querySelector(`.nav-link[data-target="${hash}"]`);
+        if (matchingLink) matchingLink.click();
+      }
+    </script>
   </body>
 </html>
